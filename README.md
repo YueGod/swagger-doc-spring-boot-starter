@@ -9,17 +9,13 @@ mvn install
 ```
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.qzw.starter.swagger</groupId>
             <artifactId>swagger-doc-spring-boot-starter</artifactId>
             <version>2.9.2</version>
         </dependency>
     </dependencies>
 ```
-3.配置文件属性
+3.配置文件属性。 
 注意，以下配置不是必须。Swagger2Doc默认是开启状态
 
 ```
