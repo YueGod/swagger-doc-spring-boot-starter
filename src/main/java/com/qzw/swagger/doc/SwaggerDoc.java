@@ -7,6 +7,4 @@ package com.qzw.swagger.doc;
  **/
 public class SwaggerDoc {
 
-
-
 }
