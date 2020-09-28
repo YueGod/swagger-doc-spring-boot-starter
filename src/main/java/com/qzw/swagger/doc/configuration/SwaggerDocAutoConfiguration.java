@@ -1,39 +1,44 @@
 package com.qzw.swagger.doc.configuration;
 
-import com.qzw.swagger.doc.SwaggerDoc;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
+import org.springframework.boot.autoconfigure.data.rest.RepositoryRestMvcAutoConfiguration;
+import org.springframework.boot.autoconfigure.http.HttpMessageConvertersAutoConfiguration;
+import org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Conditional;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportSelector;
-import org.springframework.core.type.AnnotationMetadata;
-import springfox.documentation.RequestHandler;
+import org.springframework.context.annotation.*;
+import org.springframework.core.annotation.Order;
+import org.springframework.util.StringUtils;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration;
 
 /**
  * @author quziwei
  * @date 2020/09/28
  * @description 自动装配
  */
-@EnableConfigurationProperties(SwaggerDocAutoConfigurationProperties.class)
+@EnableConfigurationProperties({SwaggerDocAutoConfigurationProperties.class})
 @Configuration
 @ConditionalOnWebApplication
+@AutoConfigureAfter({
+  WebMvcAutoConfiguration.class,
+  JacksonAutoConfiguration.class,
+  HttpMessageConvertersAutoConfiguration.class,
+  RepositoryRestMvcAutoConfiguration.class
+})
+@Import(Swagger2DocumentationConfiguration.class)
 public class SwaggerDocAutoConfiguration {
-  @Bean
-  @ConditionalOnClass(SwaggerDoc.class)
-  public SwaggerDoc swaggerDoc(SwaggerDocAutoConfigurationProperties properties) {
-    return new SwaggerDoc();
-  }
 
   @Bean
-  @ConditionalOnClass(SwaggerDoc.class)
+  @ConditionalOnClass(Swagger2DocumentationConfiguration.class)
   public Docket docket(SwaggerDocAutoConfigurationProperties properties) {
     return new Docket(DocumentationType.SWAGGER_2)
         .apiInfo(apiInfo(properties))
@@ -43,6 +48,12 @@ public class SwaggerDocAutoConfiguration {
         .build();
   }
 
+  @Bean
+  @ConditionalOnClass(Swagger2DocumentationConfiguration.class)
+  public SwaggerUiWebMvcConfigurer swaggerUiWebMvcConfigurer() {
+    return new SwaggerUiWebMvcConfigurer();
+  }
+
   public ApiInfo apiInfo(SwaggerDocAutoConfigurationProperties properties) {
     return new ApiInfoBuilder()
         .title(properties.getTitle())
@@ -50,5 +61,12 @@ public class SwaggerDocAutoConfiguration {
         .version(properties.getVersion())
         .termsOfServiceUrl(properties.getTermsOfServiceUrl())
         .build();
+  }
+
+  private String fixup(String swaggerBaseUrl) {
+    if (StringUtils.isEmpty(swaggerBaseUrl)) {
+      swaggerBaseUrl = "";
+    }
+    return StringUtils.trimTrailingCharacter(swaggerBaseUrl, '/');
   }
 }

@@ -16,7 +16,7 @@ public class SwaggerDocAutoConfigurationProperties {
   private String another = "quziwei";
 
   /** 文档描述 */
-  private String description = "Swagger2 Doc";
+    private String description = "Swagger2 Doc";
 
   /** 版本号 */
   private String version = "1.0.0";
@@ -84,5 +84,18 @@ public class SwaggerDocAutoConfigurationProperties {
 
   public void setScanPackage(String scanPackage) {
     this.scanPackage = scanPackage;
+  }
+
+  @Override
+  public String toString() {
+    return "SwaggerDocAutoConfigurationProperties{" +
+            "title='" + title + '\'' +
+            ", another='" + another + '\'' +
+            ", description='" + description + '\'' +
+            ", version='" + version + '\'' +
+            ", termsOfServiceUrl='" + termsOfServiceUrl + '\'' +
+            ", enable=" + enable +
+            ", scanPackage='" + scanPackage + '\'' +
+            '}';
   }
 }
