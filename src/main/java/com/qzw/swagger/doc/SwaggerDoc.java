@@ -1,4 +1,4 @@
-package com.qzw.swagger.doc.configuration;
+package com.qzw.swagger.doc;
 
 /**
  * @author quziwei
