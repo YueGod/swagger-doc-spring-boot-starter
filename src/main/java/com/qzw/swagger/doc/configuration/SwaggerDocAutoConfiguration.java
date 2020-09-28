@@ -48,12 +48,6 @@ public class SwaggerDocAutoConfiguration {
         .build();
   }
 
-  @Bean
-  @ConditionalOnClass(Swagger2DocumentationConfiguration.class)
-  public SwaggerUiWebMvcConfigurer swaggerUiWebMvcConfigurer() {
-    return new SwaggerUiWebMvcConfigurer();
-  }
-
   public ApiInfo apiInfo(SwaggerDocAutoConfigurationProperties properties) {
     return new ApiInfoBuilder()
         .title(properties.getTitle())
