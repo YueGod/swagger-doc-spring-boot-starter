@@ -27,6 +27,9 @@ public class SwaggerDocAutoConfigurationProperties {
   /** 是否开启Swagger */
   private boolean enable = true;
 
+  /** 扫描包路径 */
+  private String scanPackage = "com";
+
   public String getTitle() {
     return title;
   }
@@ -73,5 +76,13 @@ public class SwaggerDocAutoConfigurationProperties {
 
   public void setEnable(boolean enable) {
     this.enable = enable;
+  }
+
+  public String getScanPackage() {
+    return scanPackage;
+  }
+
+  public void setScanPackage(String scanPackage) {
+    this.scanPackage = scanPackage;
   }
 }

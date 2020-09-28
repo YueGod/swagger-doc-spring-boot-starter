@@ -9,6 +9,13 @@ import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;
+import springfox.documentation.RequestHandler;
+import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
 
 /**
  * @author quziwei
@@ -21,8 +28,27 @@ import org.springframework.core.type.AnnotationMetadata;
 public class SwaggerDocAutoConfiguration {
   @Bean
   @ConditionalOnClass(SwaggerDoc.class)
-  public SwaggerDoc swaggerDoc(
-      SwaggerDocAutoConfigurationProperties swaggerDocAutoConfigurationProperties) {
+  public SwaggerDoc swaggerDoc(SwaggerDocAutoConfigurationProperties properties) {
     return new SwaggerDoc();
+  }
+
+  @Bean
+  @ConditionalOnClass(SwaggerDoc.class)
+  public Docket docket(SwaggerDocAutoConfigurationProperties properties) {
+    return new Docket(DocumentationType.SWAGGER_2)
+        .apiInfo(apiInfo(properties))
+        .select()
+        .apis(RequestHandlerSelectors.basePackage(properties.getScanPackage()))
+        .paths(PathSelectors.any())
+        .build();
+  }
+
+  public ApiInfo apiInfo(SwaggerDocAutoConfigurationProperties properties) {
+    return new ApiInfoBuilder()
+        .title(properties.getTitle())
+        .description(properties.getDescription())
+        .version(properties.getVersion())
+        .termsOfServiceUrl(properties.getTermsOfServiceUrl())
+        .build();
   }
 }
