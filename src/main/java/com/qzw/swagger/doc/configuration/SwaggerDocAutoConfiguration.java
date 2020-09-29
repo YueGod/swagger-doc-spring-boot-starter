@@ -23,6 +23,8 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration;
 
+
+
 /**
  * @author quziwei
  * @date 2020/09/28
@@ -37,18 +39,22 @@ import springfox.documentation.swagger2.configuration.Swagger2DocumentationConfi
   RepositoryRestMvcAutoConfiguration.class
 })
 @Import(Swagger2DocumentationConfiguration.class)
-@ConditionalOnProperty(name ="enable" ,prefix = "qzw.swagger2.doc",havingValue = "true",matchIfMissing = true)
+@ConditionalOnProperty(
+    name = "enable",
+    prefix = "qzw.swagger2.doc",
+    havingValue = "true",
+    matchIfMissing = true)
 public class SwaggerDocAutoConfiguration {
 
   @Bean
   @ConditionalOnClass(Swagger2DocumentationConfiguration.class)
   public Docket docket(SwaggerDocAutoConfigurationProperties properties) {
     return new Docket(DocumentationType.SWAGGER_2)
-            .apiInfo(apiInfo(properties))
-            .select()
-            .apis(RequestHandlerSelectors.basePackage(properties.getScanPackage()))
-            .paths(PathSelectors.any())
-            .build();
+        .apiInfo(apiInfo(properties))
+        .select()
+        .apis(RequestHandlerSelectors.basePackage(properties.getScanPackage()))
+        .paths(PathSelectors.any())
+        .build();
   }
 
   public ApiInfo apiInfo(SwaggerDocAutoConfigurationProperties properties) {
