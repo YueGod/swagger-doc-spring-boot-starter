@@ -9,25 +9,25 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @ConfigurationProperties(prefix = "qzw.swagger2.doc")
 public class SwaggerDocAutoConfigurationProperties {
-  /** 标题 */
+  /** title */
   private String title = "Swagger2 Doc";
 
-  /** 作者 */
+  /** another */
   private String another = "quziwei";
 
-  /** 文档描述 */
+  /** description */
     private String description = "Swagger2 Doc";
 
-  /** 版本号 */
+  /** version */
   private String version = "1.0.0";
 
-  /** 设置文档信息 */
+  /** termsOfServiceUrl */
   private String termsOfServiceUrl = "https://gitee.com/YueGod/";
 
-  /** 是否开启Swagger */
+  /** enable or disable */
   private boolean enable = true;
 
-  /** 扫描包路径 */
+  /** scan package path */
   private String scanPackage = "com";
 
   public String getTitle() {
@@ -86,16 +86,5 @@ public class SwaggerDocAutoConfigurationProperties {
     this.scanPackage = scanPackage;
   }
 
-  @Override
-  public String toString() {
-    return "SwaggerDocAutoConfigurationProperties{" +
-            "title='" + title + '\'' +
-            ", another='" + another + '\'' +
-            ", description='" + description + '\'' +
-            ", version='" + version + '\'' +
-            ", termsOfServiceUrl='" + termsOfServiceUrl + '\'' +
-            ", enable=" + enable +
-            ", scanPackage='" + scanPackage + '\'' +
-            '}';
-  }
+
 }

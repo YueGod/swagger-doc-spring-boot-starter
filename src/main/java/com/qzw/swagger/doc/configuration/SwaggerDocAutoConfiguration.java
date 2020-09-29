@@ -28,7 +28,7 @@ import springfox.documentation.swagger2.configuration.Swagger2DocumentationConfi
 /**
  * @author quziwei
  * @date 2020/09/28
- * @description 自动装配
+ * @description auto configuration
  */
 @EnableConfigurationProperties({SwaggerDocAutoConfigurationProperties.class})
 @Configuration
