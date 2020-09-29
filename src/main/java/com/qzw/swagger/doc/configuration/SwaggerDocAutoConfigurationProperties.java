@@ -3,9 +3,8 @@ package com.qzw.swagger.doc.configuration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
+ * Swagger2 Configuration Properties
  * @author quziwei
- * @date 2020/09/28
- * @description Swagger2配置
  */
 @ConfigurationProperties(prefix = "qzw.swagger2.doc")
 public class SwaggerDocAutoConfigurationProperties {
