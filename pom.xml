@@ -4,6 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <name>swagger-doc-spring-boot-starter</name>
+    <url>https://github.com/YueGod/swagger-doc-spring-boot-starter</url>
     <groupId>io.github.yuegod.starter.swagger</groupId>
     <artifactId>swagger-doc-spring-boot-starter</artifactId>
     <version>2.9.2</version>
@@ -95,8 +96,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${jdk-version}</source>
+                    <target>${jdk-version}</target>
                     <encoding>utf-8</encoding>
                 </configuration>
             </plugin>
@@ -154,7 +155,6 @@
                         <version>1.5</version>
                         <executions>
                             <execution>
-                                <id>gpg</id>
                                 <phase>verify</phase>
                                 <goals>
                                     <goal>sign</goal>
