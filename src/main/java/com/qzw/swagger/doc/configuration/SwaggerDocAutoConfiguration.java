@@ -64,10 +64,4 @@ public class SwaggerDocAutoConfiguration {
         .build();
   }
 
-  private String fixup(String swaggerBaseUrl) {
-    if (StringUtils.isEmpty(swaggerBaseUrl)) {
-      swaggerBaseUrl = "";
-    }
-    return StringUtils.trimTrailingCharacter(swaggerBaseUrl, '/');
-  }
 }

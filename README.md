@@ -1,21 +1,17 @@
 #### 使用方法
-1.mvn install源码
 
-```
-mvn install
-```
-2.引入包
+1.引入包
 
 ```
     <dependencies>
         <dependency>
-            <groupId>com.qzw.starter.swagger</groupId>
+            <groupId>io.github.yuegod.starter.swagger</groupId>
             <artifactId>swagger-doc-spring-boot-starter</artifactId>
             <version>2.9.2</version>
         </dependency>
     </dependencies>
 ```
-3.配置文件属性。 
+2.配置文件属性。 
 注意，以下配置不是必须。Swagger2Doc默认是开启状态
 
 ```
