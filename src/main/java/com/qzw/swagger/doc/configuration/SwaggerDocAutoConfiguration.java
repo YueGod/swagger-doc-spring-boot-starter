@@ -45,7 +45,7 @@ import springfox.documentation.swagger2.configuration.Swagger2DocumentationConfi
 public class SwaggerDocAutoConfiguration {
 
   @Bean
-  @ConditionalOnClass({WebMvcAutoConfiguration.class,HttpMessageConvertersAutoConfiguration.class})
+  @ConditionalOnWebApplication
   public Docket docket(SwaggerDocAutoConfigurationProperties properties) {
     return new Docket(DocumentationType.SWAGGER_2)
         .apiInfo(apiInfo(properties))
